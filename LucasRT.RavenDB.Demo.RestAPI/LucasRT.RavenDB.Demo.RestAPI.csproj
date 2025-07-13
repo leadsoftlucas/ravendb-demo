@@ -59,6 +59,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\swagger-ui\SwaggerDark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="LucasRT.RavenDB.Demo.RestAPI.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

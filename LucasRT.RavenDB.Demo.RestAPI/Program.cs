@@ -67,6 +67,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", $"RavenDB Demo");
+    c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
     c.DocExpansion(DocExpansion.None);
     c.DefaultModelExpandDepth(2);
     c.DefaultModelRendering(ModelRendering.Example);

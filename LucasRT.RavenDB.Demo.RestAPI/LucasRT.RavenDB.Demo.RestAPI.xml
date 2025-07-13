@@ -45,11 +45,26 @@
             endpoints for retrieving guest-specific data and performing guest-related actions.</remarks>
             <param name="logger"></param>
         </member>
-        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostAsync">
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.GetGuestAsync(System.Guid)">
             <summary>
-            Handles an HTTP GET request and returns a successful response.
+            Method to retrieve a specific guest by ID.
             </summary>
-            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> representing a 200 OK response.</returns>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostGuestWelcomeAsync">
+            <summary>
+            Method to retrieve the AI context for a guest.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PatchGuestResponseAsync(System.Guid,System.String)">
+            <summary>
+            Method to patch the guest response with a message.
+            </summary>
+            <param name="chatId"></param>
+            <param name="aMessage"></param>
+            <returns></returns>
         </member>
         <member name="T:LucasRT.RavenDB.Demo.Controllers.MenusController">
             <summary>

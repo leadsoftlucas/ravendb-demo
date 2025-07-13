@@ -29,7 +29,7 @@ namespace LucasRT.RavenDB.Demo.Controllers
         {
             DTOMenuResponse dto = await menusService.LoadAsync(id);
 
-            return dto.IsNotNull() ? Ok(dto) : BadRequest();
+            return dto.IsNotNull() ? Ok(dto) : NotFound();
         }
 
         /// <summary>

@@ -61,7 +61,7 @@ namespace LeadSoft.Adapter.OpenAI_Bridge {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paste yours here..
+        ///   Looks up a localized string similar to Insert yours :).
         /// </summary>
         internal static string ApiKey {
             get {
@@ -88,7 +88,7 @@ namespace LeadSoft.Adapter.OpenAI_Bridge {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paste yours here..
+        ///   Looks up a localized string similar to Insert yours :).
         /// </summary>
         internal static string Organization {
             get {

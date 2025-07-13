@@ -1,6 +1,6 @@
 ﻿using Microsoft.SemanticKernel.ChatCompletion;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
 namespace LeadSoft.Adapter.OpenAI_Bridge.DTOs
 {
@@ -17,6 +17,10 @@ namespace LeadSoft.Adapter.OpenAI_Bridge.DTOs
 
         [DataMember]
         public string LastMessage { get; set; } = string.Empty;
+
+        [DataMember]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Guid? GuestId { get; set; }
 
         [DataMember]
         public bool WasPositive { get; set; } = false;

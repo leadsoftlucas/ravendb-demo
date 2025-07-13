@@ -27,6 +27,20 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
         [NotMapped]
         public dynamic Other_Relevant_Information { get; set; }
 
+        [DataMember]
         public IList<SocialNetwork> SocialNetworks { get; set; } = [];
+
+        public static Guest GetSample()
+            => new()
+            {
+                Name = "",
+                Email = "",
+                Nationality = "Brazilian",
+                Other_Relevant_Information = new { },
+                SocialNetworks =
+                [
+                    new ()
+                ]
+            };
     }
 }

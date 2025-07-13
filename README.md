@@ -41,6 +41,11 @@ This is a powerful feature that allows you to create complex queries without the
 
 You can bring sums, lists, averages, currency calculations, and even complex data structures without worrying about the underlying data structure. This is particularly useful in scenarios where you need to display data in a user-friendly way, such as in dashboards or reports: direct from you class.
 
+I've created some interesting interactive OpenAI integration to register dinamically a Guest into database. I just did it to RavenDB during my deadline for this test project. To use it, go the the `LeadSoft.Adapter.OpenAI_Bridge.OpenAI_Credential.resx` resource file and set your OpenAI API credentials.
+Then, start the chat, and complete the messages to fill your registration by the AI. After the AI informs that you are free to go, you can check the quality of the dynamic data generated into RavenDB or retrieving the registration by getting it by `GuestId` Guid generated on return object.
+
+If the model is not properly filled, you'll be able to see the dynamic validation model into the class. Enjoy.
+
 #### 1.1 **Dynamic data model**
 
 The first key feature of RavenDB is its ability to handle dynamic data models. This means you can easily adapt your data structure as your application evolves without the need for complex migrations or schema changes.
@@ -374,6 +379,10 @@ Less risks, less time wasted, and more focus on delivering value to your busines
 
 Worried about peak times? RavenDB has a great solution for that, you can scale up and down your database resources as needed, so you can handle peak times without worrying about performance issues or downtime.
 
+## **Pending improvements**
+
+This repository can be improved with time. I just did it for initial tests purpose.
+
 ## **Contact**
 
 If you have any questions, suggestions or just want to chat about this repository, feel free to reach out to me:
@@ -450,4 +459,4 @@ Specializing in data modeling DDD (Domain-Driven Design) orientated, he designs 
 - Extensive background in ERP systems and financial software solutions
 - Strong advocate for agile methodologies and innovative team management strategies
 
-> Thanks!
+> Thank you for your time!

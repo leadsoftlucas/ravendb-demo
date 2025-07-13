@@ -2,6 +2,7 @@
 using LeadSoft.Adapter.OpenAI_Bridge.DTOs;
 using LeadSoft.Common.Library.Extensions;
 using LucasRT.RavenDB.Demo.Application.Interfaces.Guests;
+using LucasRT.RavenDB.Demo.Domain.DTOs.Guests;
 using LucasRT.RavenDB.Demo.Domain.Entities.Chats;
 using LucasRT.RavenDB.Demo.Domain.Entities.Guests;
 using Raven.Client.Documents;
@@ -12,11 +13,16 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
 {
     public class GuestsService(IDocumentStore ravenDB, IOpen_AI openAI) : IGuestsService
     {
+        public async Task<DTOGuestResponse> LoadAsync(Guid aId)
+        {
+            using IAsyncDocumentSession ravendbsession = ravenDB.OpenAsyncSession();
+
+            return await ravendbsession.LoadAsync<Guest>(aId.GetString());
+        }
+
         public async Task<DTOChatHistory> GetAIContext()
         {
-            Guest guest = new();
-
-            DTOChatHistory chatHistory = await openAI.CreateChatHistoryAsync(guest);
+            DTOChatHistory chatHistory = await openAI.CreateChatHistoryAsync(Guest.GetSample());
 
             using IAsyncDocumentSession session = ravenDB.OpenAsyncSession();
 
@@ -49,10 +55,11 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
             chat.Context = chatHistory.Context;
             chat.Update();
 
-            if (chatHistory.LastMessage.ToUpper().Contains("|TRUE|"))
+            var messageMatch = Regex.Match(chatHistory.LastMessage, @"```plaintext\s*\n(.*?)```", RegexOptions.Singleline);
+
+            if (chatHistory.LastMessage.ToUpper().Contains("✅"))
             {
                 var guestMatch = Regex.Match(chatHistory.LastMessage, @"```json\s*\n(.*?)```", RegexOptions.Singleline);
-                var messageMatch = Regex.Match(chatHistory.LastMessage, @"```plaintext\s*\n(.*?)```", RegexOptions.Singleline);
 
                 if (guestMatch.Success)
                 {
@@ -60,15 +67,16 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
 
                     Guest guest = json.JsonToObject<Guest>();
                     guest.Enable().NewId();
+                    guest.IsValid(out _); // This should create another flow.
 
                     chat.GuestId = guest.Guid.Value;
+                    chatHistory.GuestId = guest.Guid;
 
                     await session.StoreAsync(guest);
                 }
-
-                if (messageMatch.Success)
-                    chatHistory.LastMessage = messageMatch.Groups[1].Value.Trim();
             }
+
+            chatHistory.LastMessage = messageMatch.Groups[1].Value.Trim();
 
             await session.StoreAsync(chat);
 

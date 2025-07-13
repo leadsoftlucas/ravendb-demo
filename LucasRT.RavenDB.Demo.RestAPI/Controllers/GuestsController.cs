@@ -1,5 +1,8 @@
+using LeadSoft.Adapter.OpenAI_Bridge.DTOs;
 using LeadSoft.Common.Library.Constants;
+using LeadSoft.Common.Library.Extensions;
 using LucasRT.RavenDB.Demo.Application.Interfaces.Guests;
+using LucasRT.RavenDB.Demo.Domain.DTOs.Guests;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -17,21 +20,38 @@ namespace LucasRT.RavenDB.Demo.Controllers
     public class GuestsController(IGuestsService guestService, ILogger<GuestsController> logger) : ControllerBase
     {
         /// <summary>
-        /// Handles an HTTP GET request and returns a successful response.
+        /// Method to retrieve a specific guest by ID.
         /// </summary>
-        /// <returns>An <see cref="IActionResult"/> representing a 200 OK response.</returns>
-        [HttpPost("", Name = nameof(PostAsync))]
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpHead]
+        [HttpGet("{id:guid}", Name = nameof(GetGuestAsync))]
         [Produces(Constant.ApplicationJson)]
-        public async Task<IActionResult> PostAsync()
+        public async Task<ActionResult<DTOGuestResponse>> GetGuestAsync([FromRoute] Guid id)
         {
-            return Ok(await guestService.GetAIContext());
+            DTOGuestResponse dto = await guestService.LoadAsync(id);
+
+            return dto.IsNotNull() ? Ok(dto) : NotFound();
         }
 
-        [HttpPatch("", Name = nameof(PatchAsync))]
+        /// <summary>
+        /// Method to retrieve the AI context for a guest.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("", Name = nameof(PostGuestWelcomeAsync))]
         [Produces(Constant.ApplicationJson)]
-        public async Task<IActionResult> PatchAsync([FromQuery] Guid aChatId, [FromBody] string aMessage)
-        {
-            return Ok(await guestService.FeedAIContext(aChatId, aMessage));
-        }
+        public async Task<ActionResult<DTOChatHistory>> PostGuestWelcomeAsync()
+            => Ok(await guestService.GetAIContext());
+
+        /// <summary>
+        /// Method to patch the guest response with a message.
+        /// </summary>
+        /// <param name="chatId"></param>
+        /// <param name="aMessage"></param>
+        /// <returns></returns>
+        [HttpPatch("{chatId:guid}", Name = nameof(PatchGuestResponseAsync))]
+        [Produces(Constant.ApplicationJson)]
+        public async Task<ActionResult<DTOChatHistory>> PatchGuestResponseAsync([FromRoute] Guid chatId, [FromBody] string aMessage)
+            => Ok(await guestService.FeedAIContext(chatId, aMessage));
     }
 }

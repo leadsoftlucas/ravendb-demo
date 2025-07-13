@@ -5,6 +5,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 using System.Collections.Concurrent;
+using static LeadSoft.Adapter.OpenAI_Bridge.Open_AI.Enums;
 
 namespace LeadSoft.Adapter.OpenAI_Bridge
 {
@@ -25,10 +26,11 @@ namespace LeadSoft.Adapter.OpenAI_Bridge
             {
                 DTOChatHistory dtoChatHistory = new();
 
-                dtoChatHistory.Context.AddSystemMessage($@"You are a helpful assistant and your first task is to request users information ask him to introduce himself. So this is your first question to him to open the conversation.
-                                                           You work in a RDB Beverage Database and want to know him better to fill a form with the following sample field getting info from the conversation.
-                                                           When he replies, you must generate this object for us to Store in database.
-                                                           ```json {sampleObject.ToJson()} ```");
+                string sample = sampleObject is not null
+                                    ? $"```json{Environment.NewLine}{sampleObject.ToJson()}{Environment.NewLine}```"
+                                    : "Create the json object yourself dinamically to register a Guest and his information into NoSQL RavenDB database.";
+
+                dtoChatHistory.Context.AddSystemMessage(_WelcomeMessage.Fill(DateTime.Now.ToString("dd-MM-yyyy hh:mm"), sample));
 
                 ChatMessageContent chat = await _ChatCompletition.GetChatMessageContentAsync(dtoChatHistory.Context);
                 dtoChatHistory.Context.Add(chat);
@@ -61,11 +63,11 @@ namespace LeadSoft.Adapter.OpenAI_Bridge
 
                     foreach (var item in aContexts)
                     {
-                        if (item.Role.Label.ToUpper() == "ASSISTANT")
+                        if (item.Role.Label.ToUpper().Equals(ContextLabel.ASSISTANT.ToString()))
                             dtoChatHistory.Context.AddAssistantMessage(item.Content);
-                        else if (item.Role.Label.ToUpper() == "USER")
+                        else if (item.Role.Label.ToUpper().Equals(ContextLabel.USER.ToString()))
                             dtoChatHistory.Context.AddUserMessage(item.Content);
-                        else if (item.Role.Label.ToUpper() == "SYSTEM")
+                        else if (item.Role.Label.ToUpper().Equals(ContextLabel.SYSTEM.ToString()))
                             dtoChatHistory.Context.AddSystemMessage(item.Content);
                     }
 
@@ -74,11 +76,7 @@ namespace LeadSoft.Adapter.OpenAI_Bridge
                 }
 
                 dtoChatHistory.Context.AddUserMessage(aMessage);
-                dtoChatHistory.Context.AddSystemMessage(@"Now you will use this data to understand was told to you and you must extract the information and return a message in two different flows:
-                                                          1. All information is filled and you can give us the full data and thank the guest, welcoming him to find some Beverage of his taste and add the text '|true|' at the end of the message.
-                                                          2. If some personal information required on object is missing, ask for it and add the text '|false|' at the end of the message, but ignore regular database fields (ids, creation date, valid objects, etc).
-                                                          Using markdown as 'json' code snippet, use this information to fill object template I sent you and if you get any other interesting information, create a structured and organized object with separated properties and fill it in 'Other_Relevant_Information' property as a new object.
-                                                          Add another separated markdown code snippet as 'plaintext' to return me the a good response message direct to the Guest, informing that his registry is completed.");
+                dtoChatHistory.Context.AddSystemMessage(_EnrichDataMessage);
 
                 ChatMessageContent chat = await _ChatCompletition.GetChatMessageContentAsync(dtoChatHistory.Context);
 

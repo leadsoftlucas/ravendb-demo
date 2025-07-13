@@ -10,8 +10,8 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
     [Table("SocialNetwork", Schema = "add")]
     public class SocialNetwork
     {
-        [JsonIgnore]
         [Key]
+        [JsonIgnore]
         public string Id { get; set; } = string.Empty;
 
         [JsonIgnore]

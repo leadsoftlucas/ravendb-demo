@@ -11,11 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Guests\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="LeadSoft.Common.GlobalDomain" Version="9.2.3" />
+    <PackageReference Include="LeadSoft.Common.GlobalDomain" Version="9.2.6" />
 	  <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.60.0" />
   </ItemGroup>
 
