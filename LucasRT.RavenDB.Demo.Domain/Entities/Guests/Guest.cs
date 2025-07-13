@@ -35,7 +35,7 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
             {
                 Name = "",
                 Email = "",
-                Nationality = "Brazilian",
+                Nationality = "",
                 Other_Relevant_Information = new { },
                 SocialNetworks =
                 [

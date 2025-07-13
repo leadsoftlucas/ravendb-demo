@@ -158,8 +158,8 @@ I've used Entity Framework to create a fair comparisson considered the database 
 Download and run PostgreSQL from [official website](https://www.postgresql.org/download/) if you want to run it locally. Run the service. Note that here you'll begin to see the difference between a multimodel database made to be simple and a typical relational database that requires several steps to setup, as you'll need to create the database and configure it before running the application.
 
 You can watch the video below to see how the environment setup comparisson.
-> [![Watch it on YouTube](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
-<br> Watch it on YouTube](https://www.youtube.com/watch?v=shoX67MMtLc)
+> [![Watch it on YouTube](https://img.youtube.com/vi/ZsEvm4Dl1jI/hqdefault.jpg)
+<br> Watch it on YouTube](https://youtu.be/ZsEvm4Dl1jI)
 
 #### 3.2 **Start the PostgreSQL service**
 

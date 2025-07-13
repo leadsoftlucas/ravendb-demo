@@ -76,7 +76,10 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
                 }
             }
 
-            chatHistory.LastMessage = messageMatch.Groups[1].Value.Trim();
+            chatHistory.LastMessage = messageMatch.Success
+                                            ? messageMatch.Groups[1].Value.Trim()
+                                            : chatHistory.LastMessage.Replace("❌", string.Empty)
+                                                                     .Replace("✅", string.Empty);
 
             await session.StoreAsync(chat);
 
