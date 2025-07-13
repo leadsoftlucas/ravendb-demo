@@ -14,8 +14,8 @@ You'll be able to experience how fast we can create an application with high per
 ## **Watch it on YouTube**
 
 I've published a recording that brings the experience a little deeper while I dive into the code to explain what I've done to create it.
-> [![Watch it on YouTube](https://img.youtube.com/vi/7zPucw9TFfc/hqdefault.jpg)
-Watch it on YouTube: ](https://www.youtube.com/watch?v=7zPucw9TFfc)
+> [![Watch it on YouTube](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
+<br> Watch it on YouTube: ](https://www.youtube.com/watch?v=shoX67MMtLc)
 
 ## **Resume**
 
@@ -153,8 +153,8 @@ I've used Entity Framework to create a fair comparisson considered the database 
 Download and run PostgreSQL from [official website](https://www.postgresql.org/download/) if you want to run it locally. Run the service. Note that here you'll begin to see the difference between a multimodel database made to be simple and a typical relational database that requires several steps to setup, as you'll need to create the database and configure it before running the application.
 
 You can watch the video below to see how the environment setup comparisson.
-> [![Watch it on YouTube](https://img.youtube.com/vi/7zPucw9TFfc/hqdefault.jpg)
-> Watch it on YouTube](https://www.youtube.com/watch?v=7zPucw9TFfc)
+> [![Watch it on YouTube](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
+<br> Watch it on YouTube](https://www.youtube.com/watch?v=shoX67MMtLc)
 
 #### 3.2 **Start the PostgreSQL service**
 
@@ -268,6 +268,10 @@ RavenDB was designed to be simple to setup and use as you could see on video com
 
 > From Leλd∫oft, I've created a AsValidCollection that inherits CollectionsBase, both to optimize some base functionalities focused on entity class, including Ids, enabled, created and updated dates, and model validation features to provide a simple way to create collections that will be used in the application. It may include some Counters and Time Series structures based on RavenDB context. This is a great way to simplify the code and make it more readable, while still maintaining the flexibility of the data model.
 > Available in [NuGet Gallery | LeadSoft.Common.GlobalDomain](https://www.nuget.org/packages/LeadSoft.Common.GlobalDomain).
+
+> Checkout the video below to see the data structure comparisson in action, live in TDC SP in 2024 with RavenDB: "TDC SP 2024 - NoSQL: A small step in modeling, a big leap in efficiency RavenDB & LeadSoft"
+> [![TDC SP 2024 - NoSQL: Um pequeno passo na modelagem um grande salto na eficiência RavenDB & LeadSoft](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
+<br> TDC SP 2024 - NoSQL: Um pequeno passo na modelagem um grande salto na eficiência RavenDB & LeadSoft](https://www.youtube.com/watch?v=shoX67MMtLc)
 
 ### 3. **Data validation difference**
   - **RavenDB:** Using AsValidCollection as entity inheritance, I've created some interesting fields validations that will respect DataAnnotation settings in the main class, object valued classes and properties to create a validation that will store dinamically in you class, validation errors and status to your model if necessary. If you change the rules, it won't affect data in database and the validation will be just updated when you load the document.
