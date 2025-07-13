@@ -6,7 +6,7 @@ This repository purpose is to highlight three of RavenDB's most impressive and d
 
 ## **Intro**
 
-Welcome to this repository that will demonstrate how easy and amazing is to connect and use **RavenDB** into a .net 9.0 c# Rest Web API application and a short comparisson with **PostgreSQL**.
+Welcome to this repository that will demonstrate how easy and amazing is to connect and use **RavenDB** into a .net 9.0 c# Rest Web API application and a short comparison with **PostgreSQL**.
 My goal here, is to bring the ease of use to achieve fantastic results on application features in an effortless code base.
 
 You'll be able to experience how fast we can create an application with high performance and efficiency, both on coding and runtime results.
@@ -149,7 +149,7 @@ You can download the latest version of RavenDB from the [official website](https
 Setup the environment for the PostgreSQL scope. This section will guide you through the steps to run PostgreSQL locally and configure it in your project.
 `"DATABASE_SCOPE": "PostgreSQL"`.
 
-I've used Entity Framework to create a fair comparisson considered the database sync and the sabe semantics on queries on service layer. I did't want to create a Raw SQL or Dapper perspective because the code would be too diferent to a quick comparisson.
+I've used Entity Framework to create a fair comparison considered the database sync and the sabe semantics on queries on service layer. I did't want to create a Raw SQL or Dapper perspective because the code would be too diferent to a quick comparison.
 
 > Although, I do prefer Raw SQL and Dapper if i need to use relational database.
 
@@ -157,7 +157,7 @@ I've used Entity Framework to create a fair comparisson considered the database 
 
 Download and run PostgreSQL from [official website](https://www.postgresql.org/download/) if you want to run it locally. Run the service. Note that here you'll begin to see the difference between a multimodel database made to be simple and a typical relational database that requires several steps to setup, as you'll need to create the database and configure it before running the application.
 
-You can watch the video below to see how the environment setup comparisson.
+You can watch the video below to see how the environment setup comparison.
 > [![Watch it on YouTube](https://img.youtube.com/vi/ZsEvm4Dl1jI/hqdefault.jpg)
 <br> Watch it on YouTube](https://youtu.be/ZsEvm4Dl1jI)
 
@@ -209,14 +209,14 @@ Swagger must be showing up at `https://localhost:5001/swagger/index.html` or `ht
 
 > The database scope is informed in Swagger Title, so you can easily identify which database is being used.
 
-## **Overall comparisson**
+## **Overall comparison**
 
 The experience I had developing the services is listed below. And this can seems like a small diference in a short example, but if you multiply this into hundreds of relational entities and resource services, it might create a huge number of risks to your application when you use a typical relational database that depends on migrations and manual work sync between you application domain and your database. In resume, on RavenDB, you simply don't have to worry about it at all, focus on the integrity of your entity domain classes and the Database will reflect it to you.
 
 ### 1. **Developer experience**
 Does the developer experience counts? *"They're technical, they enjoy complex things. What's the difference to him to setup the environment?"*. Well, human effort costs by minute. If you have one team member, this could be irrelevant, but if you have several teams with a good amout of microservices... it can make a team cost difference.
 
-RavenDB was designed to be simple to setup and use as you could see on video comparisson, starting from service installation and initialization. In the application, the setup keeps multiple times faster than any other database to setup and start saving and reading data. And setting up the environment when you're hurry is teasing to everyone.
+RavenDB was designed to be simple to setup and use as you could see on video comparison, starting from service installation and initialization. In the application, the setup keeps multiple times faster than any other database to setup and start saving and reading data. And setting up the environment when you're hurry is teasing to everyone.
 
   - **RavenDB:** Fast, simple and no extra installations needed.
      > It's complete in a level that RavenDB is embedded in the service as a web application that runs with the server. You don't have to install a SGBD or other tools to access it. You can access and watch or maintain your database from your phone on mobile connections if you need or want to, without installations. Strict to the point!
@@ -274,7 +274,7 @@ RavenDB was designed to be simple to setup and use as you could see on video com
 > From Leλd∫oft, I've created a AsValidCollection that inherits CollectionsBase, both to optimize some base functionalities focused on entity class, including Ids, enabled, created and updated dates, and model validation features to provide a simple way to create collections that will be used in the application. It may include some Counters and Time Series structures based on RavenDB context. This is a great way to simplify the code and make it more readable, while still maintaining the flexibility of the data model.
 > Available in [NuGet Gallery | LeadSoft.Common.GlobalDomain](https://www.nuget.org/packages/LeadSoft.Common.GlobalDomain).
 
-> Checkout the video below to see the data structure comparisson in action, live in TDC SP in 2024 with RavenDB: "TDC SP 2024 - NoSQL: A small step in modeling, a big leap in efficiency RavenDB & LeadSoft"
+> Checkout the video below to see the data structure comparison in action, live in TDC SP in 2024 with RavenDB: "TDC SP 2024 - NoSQL: A small step in modeling, a big leap in efficiency RavenDB & LeadSoft"
 > [![TDC SP 2024 - NoSQL: Um pequeno passo na modelagem um grande salto na eficiência RavenDB & LeadSoft](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
 <br> TDC SP 2024 - NoSQL: Um pequeno passo na modelagem um grande salto na eficiência RavenDB & LeadSoft](https://www.youtube.com/watch?v=shoX67MMtLc)
 
