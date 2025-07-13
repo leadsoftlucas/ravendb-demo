@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Entities\Menus\Samples\Beverages.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\Guests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LeadSoft.Common.GlobalDomain" Version="9.2.3" />
+	  <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.60.0" />
+  </ItemGroup>
+
+</Project>

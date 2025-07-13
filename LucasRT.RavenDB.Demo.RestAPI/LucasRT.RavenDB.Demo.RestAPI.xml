@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LucasRT.RavenDB.Demo.RestAPI</name>
+    </assembly>
+    <members>
+        <member name="T:LucasRT.RavenDB.Demo.RestAPI.Configurations.ServicesConfiguration">
+            <summary>
+            Provides extension methods for configuring services in an application.
+            </summary>
+            <remarks>This class contains methods to register scoped services in the dependency injection container. Use
+            these methods to add application-specific services to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
+        </member>
+        <member name="T:LucasRT.RavenDB.Demo.RestAPI.Configurations.SwaggerConfiguration">
+            <summary>
+            Provides extension methods for configuring Swagger in an ASP.NET Core application.
+            </summary>
+            <remarks>This class contains methods to integrate Swagger documentation generation into the
+            application's service collection. It enables features such as XML comments inclusion, custom schema IDs, and
+            annotations.</remarks>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.RestAPI.Configurations.SwaggerConfiguration.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures Swagger services for the application, enabling API documentation generation.
+            </summary>
+            <remarks>This method adds Swagger generation capabilities to the application's service
+            collection. It registers the Swagger documentation with metadata such as title, version, description, and
+            contact information. Additionally, it includes XML comments for API documentation, enables annotations, and
+            customizes schema IDs.</remarks>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to which Swagger services will be added.</param>
+        </member>
+        <member name="T:LucasRT.RavenDB.Demo.Controllers.GuestsController">
+            <summary>
+            Provides API endpoints for guest-related operations.
+            </summary>
+            <remarks>This controller is intended for use by guests interacting with the application. It includes
+            endpoints for retrieving guest-specific data and performing guest-related actions.</remarks>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.#ctor(LucasRT.RavenDB.Demo.Application.Interfaces.Guests.IGuestsService,Microsoft.Extensions.Logging.ILogger{LucasRT.RavenDB.Demo.Controllers.GuestsController})">
+            <summary>
+            Provides API endpoints for guest-related operations.
+            </summary>
+            <remarks>This controller is intended for use by guests interacting with the application. It includes
+            endpoints for retrieving guest-specific data and performing guest-related actions.</remarks>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostAsync">
+            <summary>
+            Handles an HTTP GET request and returns a successful response.
+            </summary>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> representing a 200 OK response.</returns>
+        </member>
+        <member name="T:LucasRT.RavenDB.Demo.Controllers.MenusController">
+            <summary>
+            This controller provides API endpoints for managing menu items in the RavenDB database.
+            </summary>
+            <param name="menusService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.#ctor(LucasRT.RavenDB.Demo.Application.Interfaces.Menus.IMenusService,Microsoft.Extensions.Logging.ILogger{LucasRT.RavenDB.Demo.Controllers.MenusController})">
+            <summary>
+            This controller provides API endpoints for managing menu items in the RavenDB database.
+            </summary>
+            <param name="menusService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.GetMenuAsync(System.Guid)">
+            <summary>
+            Get a specific menu item by its ID from the database.
+            </summary>
+            <param name="id">Beverage Id</param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.GetMenuSearchAsync(System.String,System.Int32)">
+            <summary>
+            Search for Beverages in the RavenDB database.
+            </summary>
+            <remarks>
+            Page limited to 100 items per page.
+            If no search text is provided, all Beverages will be listed.
+            </remarks>
+            <param name="searchtext">Search text to lookup database. Black to list all.</param>
+            <param name="currentPage">Current page. Default for the first page. Page limited to 100.</param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.GetMenuVectorSearchAsync(System.String,System.Int32)">
+            <summary>
+            Vector search for Beverages in the database.
+            </summary>
+            <remarks>
+            Page limited to 100 items per page.
+            Search text is mandatory and you can ask what you need that the vector search will interpretate your question and the database content.
+            </remarks>
+            <param name="searchtext"></param>
+            <param name="currentPage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.PostLikeBeverageAsync(System.Guid)">
+            <summary>
+            Method available to increment the like counter of a specific Beverage.
+            </summary>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.PostDislikeBeverageAsync(System.Guid)">
+            <summary>
+            Method available to increment the dislike counter of a specific Beverage.
+            </summary>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.MenusController.PostMenuSamplesBulkInsertAsync">
+            <summary>
+            Bulk insert sample data into the database with 30.000 Beverages, as wines, whikies and beers at once!
+            </summary>
+            <remarks>
+            Multiple calls might result in duplicate data.
+            </remarks>
+        </member>
+    </members>
+</doc>
