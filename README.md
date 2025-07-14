@@ -11,12 +11,6 @@ My goal here, is to bring the ease of use to achieve fantastic results on applic
 
 You'll be able to experience how fast we can create an application with high performance and efficiency, both on coding and runtime results.
 
-## **Watch it on YouTube**
-
-I've published a recording that brings the experience a little deeper while I dive into the code to explain what I've done to create it.
-> [![Watch it on YouTube](https://img.youtube.com/vi/shoX67MMtLc/hqdefault.jpg)
-<br> Watch it on YouTube: ](https://www.youtube.com/watch?v=shoX67MMtLc)
-
 ## **Resume**
 
 Before diving into the key features I will demonstrate a change of mindset when we discuss data modeling and why it makes all the difference on our database and code style choice.
@@ -34,7 +28,7 @@ Wait, you won't need NASA computers for that, you just need a proper database wi
 
 ## **Key features**
 
-### 1. **Dynamic data model with AI and Counters**
+### 1. **Dynamic data model with AI**
 
 An interesting detail on RavenDB data modeling experience, is that you can apply DDD (Domain Driven Design) principles to your data model. You can create your entities with calculated properties and use them as filters to query your data.
 This is a powerful feature that allows you to create complex queries without the need for complex joins or aggregations. And it simplifies a lot the queries and data display in the application.
@@ -44,10 +38,6 @@ You can bring sums, lists, averages, currency calculations, and even complex dat
 I've created some interesting interactive OpenAI integration to register dinamically a Guest into database. I just did it to RavenDB during my deadline for this test project. To use it, go the the `LeadSoft.Adapter.OpenAI_Bridge.OpenAI_Credential.resx` resource file and set your OpenAI API credentials.
 Then, start the chat, and complete the messages to fill your registration by the AI. After the AI informs that you are free to go, you can check the quality of the dynamic data generated into RavenDB or retrieving the registration by getting it by `GuestId` Guid generated on return object.
 
-If the model is not properly filled, you'll be able to see the dynamic validation model into the class. Enjoy.
-
-#### 1.1 **Dynamic data model**
-
 The first key feature of RavenDB is its ability to handle dynamic data models. This means you can easily adapt your data structure as your application evolves without the need for complex migrations or schema changes.
 This is particularly useful in scenarios where the data requirements are not fully defined upfront, such as when working with AI-generated content or rapidly changing business needs.
 
@@ -56,7 +46,14 @@ So you can populate data that the AI generates and the AI can also read in the f
 
 It's possible to store the whole AI context objects for further analisys and context recreation. And this is amazing, because ou can cross and query it very easly. And even more, you can *READ* it from RavenDB Studio in a very simple and non technical way. You don't need to be technical to navigate into data in RavenDB.
 
-#### 1.2 **Counters**
+### 2. **Full-text search, auto-indexing and Counters**
+
+RavenDB provides built-in support for full-text search, allowing you to perform advanced searches on your data without the need for complex configurations or additional libraries. And differently from other databases that uses LIKE based search, your server won't go down slow if you full text search on a very large collection.
+
+You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes manually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
+And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes manually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
+
+#### 2.1 **Counters**
 
 Another interesting thing is the usage of **Counters** in RavenDB. Counters are a powerful feature that allows you to track and aggregate data efficiently without the need for complex queries or joins.
 They are particularly useful for scenarios where you need to maintain counts, statistics, or other aggregated values in simple endpoints or when you need to track changes over time or in the middle of a process.
@@ -71,13 +68,6 @@ They are particularly useful for scenarios where you need to maintain counts, st
 
 > Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them manually.
 > In RavenDB, you just need to use the `Counters` API and you're done. You can increment or decrement counters without worrying about the underlying data structure.
-
-### 2. **Full text search & indexing**
-
-RavenDB provides built-in support for full-text search, allowing you to perform advanced searches on your data without the need for complex configurations or additional libraries. And differently from other databases that uses LIKE based search, your server won't go down slow if you full text search on a very large collection.
-
-You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes manually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
-And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes manually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
 
 ### 3. **Semantic search with Vector search and embeddings**
 
@@ -272,6 +262,7 @@ RavenDB was designed to be simple to setup and use as you could see on video com
     - **PostgreSQL:** *10 x 3 x 2 =* **60** tables to maintain
 
 > From Leλd∫oft, I've created a AsValidCollection that inherits CollectionsBase, both to optimize some base functionalities focused on entity class, including Ids, enabled, created and updated dates, and model validation features to provide a simple way to create collections that will be used in the application. It may include some Counters and Time Series structures based on RavenDB context. This is a great way to simplify the code and make it more readable, while still maintaining the flexibility of the data model.
+> If the model is not properly filled, you'll be able to see the dynamic validation model into the class.
 > Available in [NuGet Gallery | LeadSoft.Common.GlobalDomain](https://www.nuget.org/packages/LeadSoft.Common.GlobalDomain).
 
 > Checkout the video below to see the data structure comparison in action, live in TDC SP in 2024 with RavenDB: "TDC SP 2024 - NoSQL: A small step in modeling, a big leap in efficiency RavenDB & LeadSoft"
