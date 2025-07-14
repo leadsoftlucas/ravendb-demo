@@ -66,8 +66,8 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
                     string json = guestMatch.Groups[1].Value.Trim();
 
                     Guest guest = json.JsonToObject<Guest>();
-                    guest.Enable().NewId();
-                    guest.IsValid(out _); // This should create another flow.
+                    guest.Create();
+                    guest.Validate();
 
                     chat.GuestId = guest.Guid.Value;
                     chatHistory.GuestId = guest.Guid;
