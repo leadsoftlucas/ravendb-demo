@@ -90,8 +90,8 @@ So you can populate data that the AI generates and the AI can also read in the f
 It's possible to store the whole AI context objects for further analisys and context recreation. And this is amazing, because ou can cross and query it very easly. And even more, you can *READ* it from RavenDB Studio in a very simple and non technical way. You don't need to be technical to navigate into data in RavenDB.
 
 > I've created a demonstration on YouTube, you can watch below:
-> [![RavenDB vs PostgreSQL - Part 3: Vector Search and AI attendant for Guest registration with dynamic data model](https://img.youtube.com/vi//hqdefault.jpg)
-<br> RavenDB vs PostgreSQL - Part 3: Vector Search and AI attendant for Guest registration with dynamic data model](https://www.youtube.com/watch?v=)
+> [![RavenDB vs PostgreSQL - Part 3: VectorSearch and AI agent for Guest registration with dynamic model](https://img.youtube.com/vi/hOlWLPmd1RU/hqdefault.jpg)
+<br> RavenDB vs PostgreSQL - Part 3: VectorSearch and AI agent for Guest registration with dynamic model](https://www.youtube.com/watch?v=hOlWLPmd1RU)
 
 ## **Project setup**
 
