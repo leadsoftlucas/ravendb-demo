@@ -52,7 +52,7 @@ Imagine that you might need to register an interaction count of a AI agent activ
 > Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them manually.
 > In RavenDB, you just need to use the `Counters` API and you're done. You can increment or decrement counters without worrying about the underlying data structure.
 
-> I've created a demonstration on YouTube, you can watch below:
+I've created a demonstration on YouTube, you can watch below:
 > [![RavenDB vs PostgreSQL - Part 2: Bulk Insert, Fulltext Search and Counters](https://img.youtube.com/vi/Y8hXso9qCf4/hqdefault.jpg)
 <br> RavenDB vs PostgreSQL - Part 2: Bulk Insert, Fulltext Search and Counters](https://www.youtube.com/watch?v=Y8hXso9qCf4)
 
@@ -89,7 +89,7 @@ So you can populate data that the AI generates and the AI can also read in the f
 
 It's possible to store the whole AI context objects for further analisys and context recreation. And this is amazing, because ou can cross and query it very easly. And even more, you can *READ* it from RavenDB Studio in a very simple and non technical way. You don't need to be technical to navigate into data in RavenDB.
 
-> I've created a demonstration on YouTube, you can watch below:
+I've created a demonstration on YouTube, you can watch below:
 > [![RavenDB vs PostgreSQL - Part 3: VectorSearch and AI agent registration with dynamic model](https://img.youtube.com/vi/hOlWLPmd1RU/hqdefault.jpg)
 <br> RavenDB vs PostgreSQL - Part 3: VectorSearch and AI agent registration with dynamic model](https://www.youtube.com/watch?v=hOlWLPmd1RU)
 

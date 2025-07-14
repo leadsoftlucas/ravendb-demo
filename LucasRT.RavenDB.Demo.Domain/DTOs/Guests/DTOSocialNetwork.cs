@@ -24,5 +24,17 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
                 Url = socialNetwork.Url
             };
         }
+
+        public static implicit operator SocialNetwork(DTOSocialNetwork dto)
+        {
+            if (dto is null)
+                return null;
+
+            return new()
+            {
+                Name = dto.Name,
+                Url = dto.Url
+            };
+        }
     }
 }

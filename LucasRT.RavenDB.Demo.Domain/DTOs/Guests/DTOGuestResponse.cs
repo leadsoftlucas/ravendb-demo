@@ -1,4 +1,5 @@
-﻿using LucasRT.RavenDB.Demo.Domain.Entities.Guests;
+﻿using LeadSoft.Common.GlobalDomain.DTOs;
+using LucasRT.RavenDB.Demo.Domain.Entities.Guests;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
@@ -6,11 +7,8 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
 {
     [Serializable]
     [DataContract]
-    public class DTOGuestResponse
+    public class DTOGuestResponse : DTOResponse
     {
-        [DataMember]
-        public Guid Id { get; set; }
-
         [DataMember]
         public string Name { get; set; } = string.Empty;
 
@@ -28,9 +26,6 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<DTOSocialNetwork> SocialNetworks { get; set; } = [];
 
-        [DataMember]
-        public DateTime CreatedAt { get; set; }
-
         public static implicit operator DTOGuestResponse(Guest guest)
         {
             if (guest is null)
@@ -44,7 +39,11 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
                 Nationality = guest.Nationality,
                 Other_Relevant_Information = guest.Other_Relevant_Information,
                 SocialNetworks = guest.SocialNetworks?.Select(sn => (DTOSocialNetwork)sn),
-                CreatedAt = guest.CreatedAt
+                CreatedAt = guest.CreatedAt,
+                UpdatedAt = guest.UpdatedAt,
+                IsEnabled = guest.IsEnabled,
+                IsInvalid = guest.IsInvalid,
+                DtoValidations = DTOValidation.From(guest.ValidationResults)
             };
         }
     }

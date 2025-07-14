@@ -52,9 +52,15 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostGuestAsync(LucasRT.RavenDB.Demo.Domain.DTOs.Guests.DTOGuestRequest)">
+            <summary>
+            Method to post a regular form Guest registration
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostGuestWelcomeAsync">
             <summary>
-            Method to retrieve the AI context for a guest.
+            Method to retrieve the AI context for guest welcome registration.
             </summary>
             <returns></returns>
         </member>

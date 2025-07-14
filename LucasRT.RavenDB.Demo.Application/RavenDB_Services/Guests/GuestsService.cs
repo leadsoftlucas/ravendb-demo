@@ -20,6 +20,18 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
             return await ravendbsession.LoadAsync<Guest>(aId.GetString());
         }
 
+        public async Task<DTOGuestResponse> CreateAsync(DTOGuestRequest dto)
+        {
+            using IAsyncDocumentSession ravendbsession = ravenDB.OpenAsyncSession();
+
+            Guest guest = dto;
+
+            await ravendbsession.StoreAsync(guest, guest.Id);
+            await ravendbsession.SaveChangesAsync();
+
+            return guest;
+        }
+
         public async Task<DTOChatHistory> GetAIContext()
         {
             DTOChatHistory chatHistory = await openAI.CreateChatHistoryAsync(Guest.GetSample());

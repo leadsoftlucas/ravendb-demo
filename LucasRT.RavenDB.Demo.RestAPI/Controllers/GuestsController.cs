@@ -35,10 +35,19 @@ namespace LucasRT.RavenDB.Demo.Controllers
         }
 
         /// <summary>
-        /// Method to retrieve the AI context for a guest.
+        /// Method to post a regular form Guest registration
         /// </summary>
         /// <returns></returns>
-        [HttpPost("", Name = nameof(PostGuestWelcomeAsync))]
+        [HttpPost("", Name = nameof(PostGuestAsync))]
+        [Produces(Constant.ApplicationJson)]
+        public async Task<ActionResult<DTOGuestResponse>> PostGuestAsync([FromBody] DTOGuestRequest dto)
+            => Ok(await guestService.CreateAsync(dto));
+
+        /// <summary>
+        /// Method to retrieve the AI context for guest welcome registration.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Chat", Name = nameof(PostGuestWelcomeAsync))]
         [Produces(Constant.ApplicationJson)]
         public async Task<ActionResult<DTOChatHistory>> PostGuestWelcomeAsync()
             => Ok(await guestService.GetAIContext());
@@ -49,7 +58,7 @@ namespace LucasRT.RavenDB.Demo.Controllers
         /// <param name="chatId"></param>
         /// <param name="aMessage"></param>
         /// <returns></returns>
-        [HttpPatch("{chatId:guid}", Name = nameof(PatchGuestResponseAsync))]
+        [HttpPatch("Chat/{chatId:guid}", Name = nameof(PatchGuestResponseAsync))]
         [Produces(Constant.ApplicationJson)]
         public async Task<ActionResult<DTOChatHistory>> PatchGuestResponseAsync([FromRoute] Guid chatId, [FromBody] string aMessage)
             => Ok(await guestService.FeedAIContext(chatId, aMessage));
