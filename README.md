@@ -28,7 +28,50 @@ Wait, you won't need NASA computers for that, you just need a proper database wi
 
 ## **Key features**
 
-### 1. **Dynamic data model with AI**
+### 1. **Full-text search, auto-indexing and Counters**
+
+RavenDB provides built-in support for full-text search, allowing you to perform advanced searches on your data without the need for complex configurations or additional libraries. And differently from other databases that uses LIKE based search, your server won't go down slow if you full text search on a very large collection.
+
+You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes manually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
+And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes manually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
+
+#### 1.1 **Counters**
+
+Another interesting thing is the usage of **Counters** in RavenDB. Counters are a powerful feature that allows you to track and aggregate data efficiently without the need for complex queries or joins.
+They are particularly useful for scenarios where you need to maintain counts, statistics, or other aggregated values in simple endpoints or when you need to track changes over time or in the middle of a process.
+Imagine that you might need to register an interaction count of a AI agent activation by user: Would you create a table to store integers and User Ids? It would increase your model complexity.
+
+| Feature              | RavenDB Counters      | PostgreSQL Equivalent             |
+| -------------------- | --------------------- | --------------------------------- |
+| Server-side counters | ✅ Native & automatic | ❌ Not built-in, but **emulated** |
+| Stored separately    | ✅ Yes                | ✅ With separate table            |
+| No schema needed     | ✅ Yes                | ⚠️ Only with JSONB (not ideal)    |
+| Independent from doc | ✅ Yes                | ✅ With normalized model          |
+| Atomic updates       | ✅ Yes                | ✅ Supported via `UPDATE`         |
+
+> Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them manually.
+> In RavenDB, you just need to use the `Counters` API and you're done. You can increment or decrement counters without worrying about the underlying data structure.
+
+> I've created a demonstration on YouTube, you can watch below:
+> [![RavenDB vs PostgreSQL - Part 2: Bulk Insert, Fulltext Search and Counters](https://img.youtube.com/vi/Y8hXso9qCf4/hqdefault.jpg)
+<br> RavenDB vs PostgreSQL - Part 2: Bulk Insert, Fulltext Search and Counters](https://www.youtube.com/watch?v=Y8hXso9qCf4)
+
+### 2. **Semantic search with Vector search and embeddings**
+
+The experience of using semantic search with vector search and embeddings in RavenDB is truly remarkable. It allows you to perform advanced searches that go beyond simple keyword matching, enabling you to find relevant documents based on their meaning and context.
+This is particularly useful in scenarios where you need to search for documents that are semantically similar, even if they don't contain the exact same keywords. RavenDB 's vector search capabilities leverage embeddings to represent documents in a high-dimensional space, allowing for efficient and accurate similarity searches.
+
+And there is more, RavenDB provides built-in support for vector search, making it easy to integrate into your application without the need for complex configurations or additional libraries. But if you want to use an external library, you can do that too, RavenDB is flexible enough to allow you to use your preferred libraries for vector search and embeddings.
+Of course it depends on your license, but you can enable it and plug OpenAI, Google AI, Ollama, and let them generate embeddings for your documents, and then use those embeddings to perform semantic searches in your RavenDB database.
+
+What? A database that UNDERSTANDs the meaning of your data and can search for it based on your wish context? Yes, that's right!
+Once you search by vector, it will generate vector indexes for you, so you'll be able to search using high speed semantics results. And the acuracy is customizable, so you can adjust the search results to fit your needs.
+
+> I did tests on PosgreSQL with Entity Framework. It was easy and seems to work, but did not bring results as I expected. Words and phrases that were semantically similar to database content, that worked on RavenDB Vector Seach, did not return results in PostgreSQL.
+
+> *There is a demonstration video right after item 3.**
+
+### 3. **Dynamic data model with AI**
 
 An interesting detail on RavenDB data modeling experience, is that you can apply DDD (Domain Driven Design) principles to your data model. You can create your entities with calculated properties and use them as filters to query your data.
 This is a powerful feature that allows you to create complex queries without the need for complex joins or aggregations. And it simplifies a lot the queries and data display in the application.
@@ -46,41 +89,9 @@ So you can populate data that the AI generates and the AI can also read in the f
 
 It's possible to store the whole AI context objects for further analisys and context recreation. And this is amazing, because ou can cross and query it very easly. And even more, you can *READ* it from RavenDB Studio in a very simple and non technical way. You don't need to be technical to navigate into data in RavenDB.
 
-### 2. **Full-text search, auto-indexing and Counters**
-
-RavenDB provides built-in support for full-text search, allowing you to perform advanced searches on your data without the need for complex configurations or additional libraries. And differently from other databases that uses LIKE based search, your server won't go down slow if you full text search on a very large collection.
-
-You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes manually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
-And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes manually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
-
-#### 2.1 **Counters**
-
-Another interesting thing is the usage of **Counters** in RavenDB. Counters are a powerful feature that allows you to track and aggregate data efficiently without the need for complex queries or joins.
-They are particularly useful for scenarios where you need to maintain counts, statistics, or other aggregated values in simple endpoints or when you need to track changes over time or in the middle of a process.
-
-| Feature              | RavenDB Counters      | PostgreSQL Equivalent             |
-| -------------------- | --------------------- | --------------------------------- |
-| Server-side counters | ✅ Native & automatic | ❌ Not built-in, but **emulated** |
-| Stored separately    | ✅ Yes                | ✅ With separate table            |
-| No schema needed     | ✅ Yes                | ⚠️ Only with JSONB (not ideal)    |
-| Independent from doc | ✅ Yes                | ✅ With normalized model          |
-| Atomic updates       | ✅ Yes                | ✅ Supported via `UPDATE`         |
-
-> Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them manually.
-> In RavenDB, you just need to use the `Counters` API and you're done. You can increment or decrement counters without worrying about the underlying data structure.
-
-### 3. **Semantic search with Vector search and embeddings**
-
-The experience of using semantic search with vector search and embeddings in RavenDB is truly remarkable. It allows you to perform advanced searches that go beyond simple keyword matching, enabling you to find relevant documents based on their meaning and context.
-This is particularly useful in scenarios where you need to search for documents that are semantically similar, even if they don't contain the exact same keywords. RavenDB 's vector search capabilities leverage embeddings to represent documents in a high-dimensional space, allowing for efficient and accurate similarity searches.
-
-And there is more, RavenDB provides built-in support for vector search, making it easy to integrate into your application without the need for complex configurations or additional libraries. But if you want to use an external library, you can do that too, RavenDB is flexible enough to allow you to use your preferred libraries for vector search and embeddings.
-Of course it depends on your license, but you can enable it and plug OpenAI, Google AI, Ollama, and let them generate embeddings for your documents, and then use those embeddings to perform semantic searches in your RavenDB database.
-
-What? A database that UNDERSTANDs the meaning of your data and can search for it based on your wish context? Yes, that's right!
-Once you search by vector, it will generate vector indexes for you, so you'll be able to search using high speed semantics results. And the acuracy is customizable, so you can adjust the search results to fit your needs.
-
-> I did tests on PosgreSQL with Entity Framework. It was easy and seems to work, but did not bring results as I expected. Words and phrases that were semantically similar to database content, that worked on RavenDB Vector Seach, did not return results in PostgreSQL.
+> I've created a demonstration on YouTube, you can watch below:
+> [![RavenDB vs PostgreSQL - Part 3: Vector Search and AI attendant for Guest registration with dynamic data model](https://img.youtube.com/vi//hqdefault.jpg)
+<br> RavenDB vs PostgreSQL - Part 3: Vector Search and AI attendant for Guest registration with dynamic data model](https://www.youtube.com/watch?v=)
 
 ## **Project setup**
 
@@ -148,8 +159,8 @@ I've used Entity Framework to create a fair comparison considered the database s
 Download and run PostgreSQL from [official website](https://www.postgresql.org/download/) if you want to run it locally. Run the service. Note that here you'll begin to see the difference between a multimodel database made to be simple and a typical relational database that requires several steps to setup, as you'll need to create the database and configure it before running the application.
 
 You can watch the video below to see how the environment setup comparison.
-> [![Watch it on YouTube](https://img.youtube.com/vi/ZsEvm4Dl1jI/hqdefault.jpg)
-<br> Watch it on YouTube](https://youtu.be/ZsEvm4Dl1jI)
+> [![RavenDB vs PostgreSQL - Part 1: Server setup experience](https://img.youtube.com/vi/ZsEvm4Dl1jI/hqdefault.jpg)
+<br> RavenDB vs PostgreSQL - Part 1: Server setup experience](https://youtu.be/ZsEvm4Dl1jI)
 
 #### 3.2 **Start the PostgreSQL service**
 
