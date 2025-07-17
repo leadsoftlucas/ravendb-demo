@@ -26,6 +26,10 @@ Wait, you won't need NASA computers for that, you just need a proper database wi
 
 > Let's fly high with Rook, we'll show you.
 
+**Do you need reasons to chose your database?**
+> [![5 reasons to use RavenDB as THE database of your product](https://img.youtube.com/vi/u3ePP_5KBT8/hqdefault.jpg)
+<br> 5 reasons to use RavenDB as THE database of your product](https://www.youtube.com/watch?v=u3ePP_5KBT8)
+
 ## **Key features**
 
 ### 1. **Full-text search, auto-indexing and Counters**
