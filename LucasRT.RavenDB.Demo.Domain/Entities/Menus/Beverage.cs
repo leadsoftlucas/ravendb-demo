@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using static LucasRT.RavenDB.Demo.Domain.Entities.Menus.Enums;
 
 namespace LucasRT.RavenDB.Demo.Domain.Entities.Menus
@@ -10,7 +9,6 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Menus
     /// <summary>
     /// Beverage entity representing a wine, beer or whisky to feed the menu.
     /// </summary>
-    [Table("beverage")]
     public partial class Beverage : AsValidCollection
     {
         /// <summary>

@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeadSoft.Common.Library" Version="9.0.2" />
+    <PackageReference Include="LeadSoft.Common.Library" Version="9.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
     <PackageReference Include="RavenDB.Client" Version="7.1.0" />

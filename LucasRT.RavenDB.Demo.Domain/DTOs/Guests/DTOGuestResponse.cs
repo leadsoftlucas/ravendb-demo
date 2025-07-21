@@ -31,7 +31,7 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
             if (guest is null)
                 return null;
 
-            return new DTOGuestResponse
+            return new ()
             {
                 Id = guest.Guid.Value,
                 Name = guest.Name,

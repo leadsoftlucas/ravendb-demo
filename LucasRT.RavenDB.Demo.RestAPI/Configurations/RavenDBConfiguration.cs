@@ -32,7 +32,7 @@ namespace LucasRT.RavenDB.Demo.RestAPI.Configurations
             service.AddRavenDbAsyncSession();
 
             service.AddScoped<IGuestsService, GuestsService>();
-            service.AddScoped<IMenusService, MenusRavenDBService>();
+            service.AddScoped<IMenusService, MenusService>();
         }
     }
 }

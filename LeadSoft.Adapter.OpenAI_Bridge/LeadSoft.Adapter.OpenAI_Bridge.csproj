@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeadSoft.Common.Library" Version="9.0.2" />
+    <PackageReference Include="LeadSoft.Common.Library" Version="9.1.1" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.60.0" />
   </ItemGroup>
 

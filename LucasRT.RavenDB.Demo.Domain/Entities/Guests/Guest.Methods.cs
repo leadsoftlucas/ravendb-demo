@@ -1,7 +1,20 @@
-﻿namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
+﻿using LeadSoft.Common.Library.Extensions;
+
+namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
 {
     public partial class Guest
     {
+        public Guest()
+        {
+            CountersNames.Add(VisitsCounterName);
+        }
+
+        public Guest CreateVectorField()
+        {
+            VectorSearchField = this.ToJson().Flatten(excludedFields: ["VectorSearchField"]);
+            return this;
+        }
+
         public static Guest GetSample()
              => new()
              {

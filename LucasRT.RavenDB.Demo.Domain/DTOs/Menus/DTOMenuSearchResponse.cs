@@ -32,18 +32,18 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Menus
         [DataMember]
         public string Description { get; set; } = string.Empty;
 
-        public static implicit operator DTOMenuSearchResponse(Beverage Beverage)
+        public static implicit operator DTOMenuSearchResponse(Beverage beverage)
         {
-            return new DTOMenuSearchResponse
+            return new()
             {
-                Id = Beverage.Guid.Value,
-                Item = string.Join(" | ", Beverage.Label,
-                                          Beverage.Country,
-                                          Beverage.Type,
-                                          Beverage.Variety,
-                                          Beverage.Producer),
-                BeverageType = Beverage.BeverageType,
-                Description = Beverage.Description
+                Id = beverage.Guid.Value,
+                Item = string.Join(" | ", beverage.Label,
+                                          beverage.Country,
+                                          beverage.Type,
+                                          beverage.Variety,
+                                          beverage.Producer),
+                BeverageType = beverage.BeverageType,
+                Description = beverage.Description
             };
         }
     }

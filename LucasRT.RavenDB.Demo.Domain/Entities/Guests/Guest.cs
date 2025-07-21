@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
 {
-    [Table("Guest")]
     public partial class Guest : AsValidCollection
     {
         [Required]
@@ -16,10 +15,11 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
         [Required]
         public string Nationality { get; set; } = string.Empty;
 
-        [Required]
         [NotMapped]
         public dynamic Other_Relevant_Information { get; set; }
 
         public IList<SocialNetwork> SocialNetworks { get; set; } = [];
+
+        public string VectorSearchField { get; private set; }
     }
 }

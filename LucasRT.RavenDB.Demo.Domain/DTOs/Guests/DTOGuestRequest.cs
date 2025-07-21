@@ -33,7 +33,7 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Guests
             };
 
             guest.Create();
-            guest.Validate();
+            guest.CreateVectorField().Validate();
 
             return guest;
         }

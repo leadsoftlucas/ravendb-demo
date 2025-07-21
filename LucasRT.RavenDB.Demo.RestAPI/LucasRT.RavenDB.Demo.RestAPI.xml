@@ -52,6 +52,25 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.GetGuestsAsync(System.String,System.Int32)">
+            <summary>
+            Method to search text guests
+            </summary>
+            <param name="searchtext">Search text to lookup database. Black to list all.</param>
+            <param name="currentPage">Current page. Default for the first page. Page limited to 100.</param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.GetGuestsVectorSearchAsync(System.String,System.Int32)">
+            <summary>
+            Vector search for Guests base knowledge in the database.
+            </summary>
+            <remarks>
+            Page limited to 100 items per page.
+            Search text is mandatory and you can ask what you need that the vector search will interpretate your question and the database content.
+            </remarks>
+            <param name="searchtext"></param>
+            <param name="currentPage"></param>
+            <returns></returns>
+        </member>
         <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostGuestAsync(LucasRT.RavenDB.Demo.Domain.DTOs.Guests.DTOGuestRequest)">
             <summary>
             Method to post a regular form Guest registration
@@ -71,6 +90,14 @@
             <param name="chatId"></param>
             <param name="aMessage"></param>
             <returns></returns>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.GuestsController.PostGuestSamplesBulkInsertAsync">
+            <summary>
+            Bulk insert sample data into the database with 50.000 Guests at once!
+            </summary>
+            <remarks>
+            Multiple calls might result in duplicate data.
+            </remarks>
         </member>
         <member name="T:LucasRT.RavenDB.Demo.Controllers.MenusController">
             <summary>

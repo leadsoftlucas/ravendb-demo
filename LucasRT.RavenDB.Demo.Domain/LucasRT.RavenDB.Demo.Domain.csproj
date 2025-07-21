@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Entities\Guests\Samples\Guests.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Entities\Guests\Samples\Guests.json" />
     <EmbeddedResource Include="Entities\Menus\Samples\Beverages.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeadSoft.Common.GlobalDomain" Version="9.2.7" />
+    <PackageReference Include="LeadSoft.Common.GlobalDomain" Version="9.2.12" />
 	  <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.60.0" />
   </ItemGroup>
 

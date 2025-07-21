@@ -11,7 +11,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_SCOPE": "RavenDB",
         //"DATABASE_SCOPE": "PostgreSQL",
-        "RAVENDB_PASSWORD": "Publisher_Local_X1"
+        "RAVENDB_PASSWORD": "RavenDB_Development"
       }
     }
   }
