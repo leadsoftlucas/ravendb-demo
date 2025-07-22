@@ -9,8 +9,9 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Orders
         {
             var random = new Random();
             Id = Guid.NewGuid();
-            Price = new Price((decimal)(random.NextDouble() * 100), (decimal)(random.NextDouble() * 50));
-            Quantity = (decimal)(random.NextDouble() * 10 + 1);
+            Price = new Price(Math.Round((decimal)(random.NextDouble() * 250), 2),
+                              Math.Round((decimal)(random.NextDouble() * 50), 2));
+            Quantity = Math.Round((decimal)(random.NextDouble() * 10 + 1), 0);
 
             return this;
         }

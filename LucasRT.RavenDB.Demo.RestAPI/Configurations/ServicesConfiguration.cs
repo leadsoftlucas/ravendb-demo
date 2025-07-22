@@ -1,4 +1,6 @@
 ﻿using LeadSoft.Adapter.OpenAI_Bridge;
+using LucasRT.RavenDB.Demo.Application.Interfaces.Menus;
+using LucasRT.RavenDB.Demo.Application.RavenDB_Services.Orders;
 
 namespace LucasRT.RavenDB.Demo.RestAPI.Configurations
 {
@@ -12,6 +14,7 @@ namespace LucasRT.RavenDB.Demo.RestAPI.Configurations
         public static void AddSingletonServices(this IServiceCollection services)
         {
             services.AddSingleton<IOpen_AI, Open_AI>();
+            services.AddSingleton<IOrdersSingleton, OrdersSingleton>();
         }
     }
 }

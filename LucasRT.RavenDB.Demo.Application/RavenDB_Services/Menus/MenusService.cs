@@ -6,6 +6,7 @@ using LucasRT.RavenDB.Demo.Domain.Entities.Menus;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Linq;
 using Raven.Client.Documents.Session;
+using System.Collections.Concurrent;
 
 namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Menus
 {
@@ -86,7 +87,7 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Menus
             IList<Beverage> beverages = await ravendbsession.Advanced.AsyncDocumentQuery<Beverage>()
                                                                      .Skip(currentPage * 100)
                                                                      .Take(100)
-                                                                     .VectorSearch(field => field.WithText(x => x.Description),
+                                                                     .VectorSearch(field => field.WithText(x => x.VectorSearchField),
                                                                                    searchTerm => searchTerm.ByText(aSearch))
                                                                      .WaitForNonStaleResults()
                                                                      .ToListAsync();
@@ -98,28 +99,37 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Menus
         {
             DTOOperationStatisticsResponse dtoResponse = new("Creating mocked data into RavenDB with Bulk Insert");
 
-            IList<Beverage> beverages = Beverage.GetSamples(out DTOOperation dtoFileOperation);
+            ConcurrentDictionary<Guid, Beverage> beverages = Beverage.GetSamples(out DTOOperation dtoFileOperation);
+            DTOOperation dtoDataPreparationOperation = PrepareDataParallel(beverages);
             DTOOperation dtoBulkOperation = await BulkInsertAsync(beverages);
 
             dtoResponse.DtoOperations.Add(dtoFileOperation);
+            dtoResponse.DtoOperations.Add(dtoDataPreparationOperation);
             dtoResponse.DtoOperations.Add(dtoBulkOperation);
 
             return dtoResponse.Finish();
         }
 
-        private async Task<DTOOperation> BulkInsertAsync(IList<Beverage> Beverages)
+        private static DTOOperation PrepareDataParallel(ConcurrentDictionary<Guid, Beverage> beverages)
         {
-            DTOOperation dtoBulkOperation = new($"Bulk Insert Operation on {Beverages.Count} documents.");
+            DTOOperation dtoDataPreparationOperation = new($"Prepare data serializing and flatting information in Parallel Operation on {beverages.Count} documents.");
+
+            Parallel.ForEach(beverages, guest =>
+            {
+                guest.Value.Enable();
+                guest.Value.CreateVectorField().Validate();
+            });
+
+            return dtoDataPreparationOperation.Finish();
+        }
+
+        private async Task<DTOOperation> BulkInsertAsync(ConcurrentDictionary<Guid, Beverage> beverages)
+        {
+            DTOOperation dtoBulkOperation = new($"Bulk Insert Operation on {beverages.Count} documents.");
 
             using var bulkInsert = ravenDB.BulkInsert();
 
-            foreach (Beverage beverage in Beverages)
-            {
-                beverage.Enable().NewId();
-                beverage.Validate();
-            }
-
-            foreach (Beverage beverage in Beverages)
+            foreach (Beverage beverage in beverages.Values)
                 await bulkInsert.StoreAsync(beverage, beverage.Id);
 
             return dtoBulkOperation.Finish();

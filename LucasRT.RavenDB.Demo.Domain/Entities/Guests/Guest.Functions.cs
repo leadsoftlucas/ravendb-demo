@@ -7,9 +7,6 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Guests
 {
     public partial class Guest
     {
-        public const string VisitsCounterName = "Visits";
-
-
         public static ConcurrentDictionary<Guid, Guest> GetSamples(out DTOOperation oDtoFileOperation)
         {
             oDtoFileOperation = new("Guests files reading...");

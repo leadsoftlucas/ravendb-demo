@@ -14,12 +14,6 @@ using System.Text.RegularExpressions;
 
 namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
 {
-    /// <summary>
-    /// Demo - up to 10 minutes
-    /// Querying & indexing in ravendb - intent to blow our mind
-    /// focus on speed of development and the performance at runtime
-    /// overall complexity of the solution - contrast with other alternatives and show how we do better
-    /// </summary>
     public class GuestsService(IDocumentStore ravenDB, IOpen_AI openAI) : IGuestsService
     {
         public async Task<DTOGuestResponse> LoadAsync(Guid aId)
@@ -154,7 +148,7 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
 
             ConcurrentDictionary<Guid, Guest> indexedGuests = Guest.GetSamples(out DTOOperation dtoFileOperation);
             DTOOperation dtoDataPreparationOperation = PrepareDataParallel(indexedGuests);
-            DTOOperation dtoBulkOperation = await BulkInsertAsync([.. indexedGuests.Values]);
+            DTOOperation dtoBulkOperation = await BulkInsertAsync(indexedGuests);
 
             dtoResponse.DtoOperations.Add(dtoFileOperation);
             dtoResponse.DtoOperations.Add(dtoDataPreparationOperation);
@@ -176,13 +170,13 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests
             return dtoDataPreparationOperation.Finish();
         }
 
-        private async Task<DTOOperation> BulkInsertAsync(IList<Guest> guests)
+        private async Task<DTOOperation> BulkInsertAsync(ConcurrentDictionary<Guid, Guest> guests)
         {
             DTOOperation dtoBulkOperation = new($"Bulk Insert Operation on {guests.Count} documents.");
 
             using var bulkInsert = ravenDB.BulkInsert();
 
-            foreach (Guest guest in guests)
+            foreach (Guest guest in guests.Values)
                 await bulkInsert.StoreAsync(guest, guest.Id);
 
             return dtoBulkOperation.Finish();

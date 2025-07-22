@@ -74,6 +74,8 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Menus
         [Required]
         [MaxLength(255)]
         public string Country { get; set; } = string.Empty;
+
+        public string VectorSearchField { get; private set; }
     }
 
     public static partial class Enums

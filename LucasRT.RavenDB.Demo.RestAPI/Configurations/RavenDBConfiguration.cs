@@ -4,6 +4,7 @@ using LucasRT.RavenDB.Demo.Application.Interfaces.Guests;
 using LucasRT.RavenDB.Demo.Application.Interfaces.Menus;
 using LucasRT.RavenDB.Demo.Application.RavenDB_Services.Guests;
 using LucasRT.RavenDB.Demo.Application.RavenDB_Services.Menus;
+using LucasRT.RavenDB.Demo.Application.RavenDB_Services.Orders;
 using LucasRT.RavenDB.Demo.Domain;
 using Raven.DependencyInjection;
 using System.Reflection;
@@ -33,6 +34,7 @@ namespace LucasRT.RavenDB.Demo.RestAPI.Configurations
 
             service.AddScoped<IGuestsService, GuestsService>();
             service.AddScoped<IMenusService, MenusService>();
+            service.AddScoped<IOrdersService, OrdersService>();
         }
     }
 }

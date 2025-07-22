@@ -17,9 +17,10 @@ namespace LucasRT.RavenDB.Demo.Domain.Entities.Orders
         public Price Price { get; set; } = new();
 
         [Required]
-        [Range(1.0, Double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}.")]
+        [Range(1.0, double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}.")]
         public decimal Quantity { get; set; } = 1;
 
+        public decimal TotalCost { get => Price.Cost * Quantity; }
         public decimal TotalPrice { get => Price.Value * Quantity; }
     }
 }

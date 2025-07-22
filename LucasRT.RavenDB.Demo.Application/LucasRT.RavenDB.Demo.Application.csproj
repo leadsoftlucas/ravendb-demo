@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Certificates\RavenDB_Development.pfx" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="EFCore.BulkExtensions" Version="9.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7">

@@ -6,6 +6,7 @@ using LucasRT.RavenDB.Demo.Domain.DTOs;
 using LucasRT.RavenDB.Demo.Domain.DTOs.Menus;
 using LucasRT.RavenDB.Demo.Domain.Entities.Menus;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Concurrent;
 
 namespace LucasRT.RavenDB.Demo.Application.PostgreSQL_Services.Menus
 {
@@ -57,8 +58,8 @@ namespace LucasRT.RavenDB.Demo.Application.PostgreSQL_Services.Menus
         {
             DTOOperationStatisticsResponse dtoResponse = new("Creating mocked data into PostgreSQL with Bulk Insert.");
 
-            IList<Beverage> Beverages = Beverage.GetSamples(out DTOOperation dtoFileOperation);
-            DTOOperation dtoBulkOperation = await BulkInsertAsync(Beverages);
+            ConcurrentDictionary<Guid, Beverage> Beverages = Beverage.GetSamples(out DTOOperation dtoFileOperation);
+            DTOOperation dtoBulkOperation = await BulkInsertAsync([.. Beverages.Values]);
 
             dtoResponse.DtoOperations.Add(dtoFileOperation);
             dtoResponse.DtoOperations.Add(dtoBulkOperation);
@@ -66,17 +67,17 @@ namespace LucasRT.RavenDB.Demo.Application.PostgreSQL_Services.Menus
             return dtoResponse.Finish();
         }
 
-        private async Task<DTOOperation> BulkInsertAsync(IList<Beverage> Beverages)
+        private async Task<DTOOperation> BulkInsertAsync(IList<Beverage> beverages)
         {
-            DTOOperation dtoBulkOperation = new($"Bulk Insert Operation on {Beverages.Count} records.");
+            DTOOperation dtoBulkOperation = new($"Bulk Insert Operation on {beverages.Count} records.");
 
-            foreach (var beverage in Beverages)
+            foreach (Beverage beverage in beverages)
             {
                 if (beverage.IsValid(out _))
                     beverage.Enable().NewId();
             }
 
-            await unitOfWork.GetDbContext().BulkInsertAsync(Beverages.ToList());
+            await unitOfWork.GetDbContext().BulkInsertAsync(beverages.ToList());
 
             return dtoBulkOperation.Finish();
         }

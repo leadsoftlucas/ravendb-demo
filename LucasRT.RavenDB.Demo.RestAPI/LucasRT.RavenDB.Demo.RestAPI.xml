@@ -160,5 +160,21 @@
             Multiple calls might result in duplicate data.
             </remarks>
         </member>
+        <member name="T:LucasRT.RavenDB.Demo.Controllers.OrdersController">
+            <summary>
+            This controller provides API endpoints for managing orders in the RavenDB database.
+            </summary>
+            <param name="ordersBuilder"></param>
+            <param name="ordersService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.OrdersController.#ctor(LucasRT.RavenDB.Demo.Application.Interfaces.Menus.IOrdersSingleton,LucasRT.RavenDB.Demo.Application.Interfaces.Menus.IOrdersService,Microsoft.Extensions.Logging.ILogger{LucasRT.RavenDB.Demo.Controllers.OrdersController})">
+            <summary>
+            This controller provides API endpoints for managing orders in the RavenDB database.
+            </summary>
+            <param name="ordersBuilder"></param>
+            <param name="ordersService"></param>
+            <param name="logger"></param>
+        </member>
     </members>
 </doc>
