@@ -67,7 +67,7 @@ namespace LucasRT.RavenDB.Demo.Application.PostgreSQL_Services.Data
             // Caminho base para encontrar o appsettings.json (do projeto de startup, geralmente)
             var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../LucasRT.RavenDB.Demo.RestAPI");
 
-            // Criação da configuração manual (design-time)
+            // Criação da configuração mAnnual (design-time)
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath)
                 .AddJsonFile("appsettings.Development.json", optional: false)

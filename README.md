@@ -36,8 +36,8 @@ Wait, you won't need NASA computers for that, you just need a proper database wi
 
 RavenDB provides built-in support for full-text search, allowing you to perform advanced searches on your data without the need for complex configurations or additional libraries. And differently from other databases that uses LIKE based search, your server won't go down slow if you full text search on a very large collection.
 
-You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes manually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
-And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes manually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
+You can chose several fields and combine how you want to interpretate the search terms, and apply where clauses to filter the results. The magic here are the auto-index amazing feature in RavenDB, that will create the indexes for you based on the queries you perform. This means you don't have to worry about creating and maintaining indexes mAnnually, as RavenDB will handle it for you automatically. What is a nightmare on MongoDB...
+And the indexes are queried automatically when you search a collection, so you can focus on building your application without worrying about performance issues. On MongoDB, you have to create indexes mAnnually and maintain them, and if you were quering a collection and needs to create an index, you'll have to change or code to search the index instead of the collection, what can induce mistakes and waste your developers trying to find out why is it still slow.
 
 #### 1.1 **Counters**
 
@@ -53,7 +53,7 @@ Imagine that you might need to register an interaction count of a AI agent activ
 | Independent from doc | ✅ Yes                | ✅ With normalized model          |
 | Atomic updates       | ✅ Yes                | ✅ Supported via `UPDATE`         |
 
-> Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them manually.
+> Trust me, if you have a very complex data model with several entities and relations, you don't want to use counters in PostgreSQL, because you'll have to create a table for each counter and manage them mAnnually.
 > In RavenDB, you just need to use the `Counters` API and you're done. You can increment or decrement counters without worrying about the underlying data structure.
 
 I've created a demonstration on YouTube, you can watch below:
@@ -216,7 +216,7 @@ Swagger must be showing up at `https://localhost:5001/swagger/index.html` or `ht
 
 ## **Overall comparison**
 
-The experience I had developing the services is listed below. And this can seems like a small diference in a short example, but if you multiply this into hundreds of relational entities and resource services, it might create a huge number of risks to your application when you use a typical relational database that depends on migrations and manual work sync between you application domain and your database. In resume, on RavenDB, you simply don't have to worry about it at all, focus on the integrity of your entity domain classes and the Database will reflect it to you.
+The experience I had developing the services is listed below. And this can seems like a small diference in a short example, but if you multiply this into hundreds of relational entities and resource services, it might create a huge number of risks to your application when you use a typical relational database that depends on migrations and mAnnual work sync between you application domain and your database. In resume, on RavenDB, you simply don't have to worry about it at all, focus on the integrity of your entity domain classes and the Database will reflect it to you.
 
 ### 1. **Developer experience**
 Does the developer experience counts? *"They're technical, they enjoy complex things. What's the difference to him to setup the environment?"*. Well, human effort costs by minute. If you have one team member, this could be irrelevant, but if you have several teams with a good amout of microservices... it can make a team cost difference.
@@ -322,7 +322,7 @@ Here I'll provide a project dependency and class structures to compare what does
 - **PostgreSQL**
     You need to configure the Entity Framework Core in your `Program.cs` file, and you have to create a DbContext class that will represent your database context. The code below shows how to set up the DbContext with the connection string and the database name.
     After that, you must set up when the migrations will be applied, from the CI/CD pipeline or from the application startup.
-    Then you can inject the DbContext into your services and repositories to access the database, but you have to be careful with migrations and schema changes. Add manually each entity to the DbContext for mapping it to the database.
+    Then you can inject the DbContext into your services and repositories to access the database, but you have to be careful with migrations and schema changes. Add mAnnually each entity to the DbContext for mapping it to the database.
     
     Remember that you'll have to configure properly several kinds of options to each table, like some specific field types, relationships, enumerators behaviour, etc. This can be a nightmare if you have several entities and relations to maintain. Again, imagine the merge process in auto generated classes...
 

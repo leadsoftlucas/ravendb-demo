@@ -176,5 +176,17 @@
             <param name="ordersService"></param>
             <param name="logger"></param>
         </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.OrdersController.GetOrderAsync(System.Guid)">
+            <summary>
+            Gets a specific Order by its ID.
+            </summary>
+            <param name="aId">Order Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:LucasRT.RavenDB.Demo.Controllers.OrdersController.GetAnnualDashboardAsync(System.Nullable{System.Guid},System.Nullable{System.Guid})">
+            <summary>
+            Gets Order annual dashboard data.
+            </summary>        
+        </member>
     </members>
 </doc>

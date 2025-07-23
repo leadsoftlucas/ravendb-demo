@@ -1,12 +1,13 @@
 ﻿using LucasRT.RavenDB.Demo.Domain.Entities.Menus;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using static LucasRT.RavenDB.Demo.Domain.Entities.Menus.Enums;
 
-namespace LucasRT.RavenDB.Demo.Domain.DTOs.Menus
+namespace LucasRT.RavenDB.Demo.Domain.DTOs.Orders
 {
     [Serializable]
     [DataContract]
-    public partial class DTOMenuSearchResponse
+    public partial class DTOBeverage
     {
         /// <summary>
         /// Item Id
@@ -32,7 +33,20 @@ namespace LucasRT.RavenDB.Demo.Domain.DTOs.Menus
         [DataMember]
         public string Description { get; set; } = string.Empty;
 
-        public static implicit operator DTOMenuSearchResponse(Beverage aBeverage)
+        [DataMember]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public decimal? QuantitySold { get; set; } = null;
+
+        public DTOBeverage SetQuantity(decimal aQuantity)
+        {
+            QuantitySold = aQuantity;
+            return this;
+        }
+
+        public static DTOBeverage From(Beverage aBeverage)
+            => aBeverage;
+
+        public static implicit operator DTOBeverage(Beverage aBeverage)
         {
             if (aBeverage is null)
                 return null;
