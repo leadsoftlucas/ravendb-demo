@@ -57,6 +57,11 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Orders
         {
             using IAsyncDocumentSession ravendbsession = ravenDB.OpenAsyncSession();
 
+            int pageSize = 50000,
+            currentPage = 0;
+
+            ravendbsession.Advanced.MaxNumberOfRequestsPerSession = 500000;
+
             IRavenQueryable<Order> query = ravendbsession.Query<Order>()
                                                          .Where(o => o.IsEnabled && !o.IsInvalid &&
                                                                      o.PurchasedAt.Year == aYear &&
@@ -68,15 +73,23 @@ namespace LucasRT.RavenDB.Demo.Application.RavenDB_Services.Orders
             if (aBeverageId.HasValue)
                 query = query.Where(g => g.Items.Any(i => i.Beverage.Guid.Value == aBeverageId));
 
-            IList<Order> orders = await query.ToListAsync();
+            IEnumerable<Order> orders = await query.Statistics(out QueryStatistics qryStats)
+                                                               .Skip(currentPage * pageSize)
+                                                               .Take(pageSize)
+                                                               .ToListAsync();
 
-            IList<Guid> guestGuids = orders.Select(o => o.GuestId).Distinct().ToList();
+            while (++currentPage <= qryStats.TotalResults / pageSize)
+                orders = orders.Concat(await query.Skip(currentPage * pageSize)
+                                                              .Take(pageSize)
+                                                              .ToListAsync());
+
+            IList<Guid> guestGuids = [.. orders.Select(o => o.GuestId).Distinct()];
 
             IList<Guest> guests = await ravendbsession.Query<Guest>()
                                                       .Where(g => g.Guid.Value.In(guestGuids))
                                                       .ToListAsync();
 
-            return new(aYear, aMonth, orders, guests);
+            return new(aYear, aMonth, [.. orders], guests);
         }
     }
 }
